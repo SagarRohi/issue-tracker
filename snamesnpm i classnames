@@ -1,0 +1,17 @@
+[33mcommit dbab73b5508963e35c9e7824bea1d5af4c24a248[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Sagar Rohi <sagar.rohi16@gmail.com>
+Date:   Sun Feb 4 15:50:50 2024 +0530
+
+    created Navbar
+
+[33mcommit 1ab113cd294c07a21a9da559a0600e3292e7ed60[m
+Author: Sagar Rohi <sagar.rohi16@gmail.com>
+Date:   Sun Feb 4 15:28:48 2024 +0530
+
+    set up project
+
+[33mcommit f3e6a855253ac7d83a2af4ba032ac3c1255ec007[m
+Author: Sagar Rohi <sagar.rohi16@gmail.com>
+Date:   Sun Feb 4 15:22:35 2024 +0530
+
+    Initial commit from Create Next App
