@@ -16,8 +16,9 @@ const NavBar = () => {
         <AiFillBug />
       </Link>
       <ul className="flex space-x-6">
-        {links.map((link) => (
+        {links.map((link, idx) => (
           <li
+            key={idx}
             className={classNames({
               "text-slate-900": link.link === currentPath,
               "text-slate-500": link.link !== currentPath,
