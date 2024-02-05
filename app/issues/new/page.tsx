@@ -9,6 +9,8 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 const NewIssuePage = () => {
@@ -22,6 +24,7 @@ const NewIssuePage = () => {
     resolver: zodResolver(createIssueSchema),
   });
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <div className="max-w-xl ">
       {error && (
@@ -33,9 +36,11 @@ const NewIssuePage = () => {
         className="space-y-3"
         onSubmit={handleSubmit(async (data) => {
           try {
+            setIsSubmitting(true);
             await axios.post("/api/issue", data);
             router.push("/issues");
           } catch (error) {
+            setIsSubmitting(false);
             setError("An Unexpected Error Occurred");
           }
         })}
@@ -43,11 +48,7 @@ const NewIssuePage = () => {
         <TextField.Root>
           <TextField.Input placeholder="Title" {...register("title")} />
         </TextField.Root>
-        {errors.title && (
-          <Text color="red" as="p">
-            {errors.title.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}
@@ -55,16 +56,13 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        {errors.description && (
-          <Text color="red" as="p">
-            {errors.description.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <button
+          disabled={isSubmitting}
           className=" hover:bg-violet-800 
       shadow-md cursor-pointer bg-violet-700 px-3 py-2 rounded-md text-white"
         >
-          Submit New Issue
+          Submit New Issue {isSubmitting && <Spinner />}
         </button>
       </form>
     </div>
